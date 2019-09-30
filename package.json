@@ -1,0 +1,16 @@
+{
+  "name": "360_video",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "gifgaar",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel index.html -p 3000"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "sass": "^1.22.12",
+    "three": "^0.108.0",
+    "three-orbitcontrols": "^2.108.1"
+  }
+}
