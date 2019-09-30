@@ -12,10 +12,13 @@ document.body.appendChild(renderer.domElement);
 
 let controls = new THREE.OrbitControls(camera, renderer.domElement);
 
+let video = document.querySelector("video");
+video.play();
+
 let dome = new THREE.Mesh(
     new THREE.SphereGeometry(50, 32, 32).scale(-1, 1, 1),
     new THREE.MeshBasicMaterial({
-         map: /*  add texture */
+         map: new THREE.VideoTexture(video)
     })
 );
 
