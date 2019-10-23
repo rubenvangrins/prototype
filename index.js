@@ -1,7 +1,7 @@
 import './style.scss'
 import * as THREE from 'three'
 import * as OrbitControls from 'three-orbitcontrols'
-import Stats from 'stats.js'
+import Stats from 'stats.js';
 
 let scene, camera, renderer, controls, stats
 
