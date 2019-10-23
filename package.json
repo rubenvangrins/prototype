@@ -8,8 +8,10 @@
     "dev": "parcel index.html -p 3000"
   },
   "devDependencies": {
+    "gsap": "^2.1.3",
     "parcel-bundler": "^1.12.3",
     "sass": "^1.22.12",
+    "stats-js": "^1.0.1",
     "three": "^0.108.0",
     "three-orbitcontrols": "^2.108.1"
   }
