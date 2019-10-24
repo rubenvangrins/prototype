@@ -8,6 +8,7 @@
     "dev": "parcel index.html -p 3000"
   },
   "devDependencies": {
+    "gsap": "^2.1.3",
     "parcel-bundler": "^1.12.3",
     "sass": "^1.22.12",
     "stats.js": "^0.17.0",
