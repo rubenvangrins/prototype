@@ -14,3 +14,6 @@ Het ontwikkelen van een 360 experience met behulp van een png en video. De png e
 
 ## Experiment 5
 Klikbare objecten ontwikkelen
+
+## Experiment 6
+Transititie tussen twee scenes (spheres)
