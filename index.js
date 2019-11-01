@@ -5,22 +5,22 @@ import Stats from 'stats.js';
 import imageSource from './src/img/kick_cut.png';
 import videoSource from './src/video/kickboxer_cut_out.webm';
 
-// Wollah meh a sahbe
-// Play hard
-// Get cache
-THREE.Cache.enabled = true;
-
 let scene, camera, renderer, controls, stats, video, texture, dome, material, mesh
 
-function getCanvasImage() { 
-    let canvas = document.createElement('canvas'),
-    ctx = canvas.getContext('2d'),
-    texture = new THREE.Texture(canvas)
+let canvas = document.createElement('canvas'),
+ctx = canvas.getContext('2d');
 
-    canvas.width  = 2048
-    canvas.height = 1024
+canvas.width  = 2048
+canvas.height = 1024
 
-    let img = new Image();
+canvas.offscreenCanvas = document.createElement('canvas');
+canvas.offscreenCanvas.width = 895;
+canvas.offscreenCanvas.height = 457.5;
+
+function getCanvasImage() {     
+    texture = new THREE.CanvasTexture(canvas)
+
+    let img = new Image()
 
     img.onload = function() {
         ctx.drawImage(img, 0, 0, 2048, 1024);
@@ -29,21 +29,33 @@ function getCanvasImage() {
 
     img.src = imageSource;
 
-    let video = document.createElement("video")
-    video.src = videoSource
+    // let video = document.createElement("video")
+    // video.src = videoSource
 
-    video.oncanplay = () => {
-        requestAnimationFrame(animation)
-        video.play()
-        video.muted = true
-        video.loop = true
-    }
+    // video.play();
 
-    function animation() {
-        ctx.drawImage(video, 895, 457.5, 502, 318)
-        requestAnimationFrame(animation)
-        texture.needsUpdate = true;
-    }
+    // video.oncanplay = () => {
+    //     requestAnimationFrame( animation );
+    //     video.play()
+    // }
+
+    // function animation() {
+    //     ctx.drawImage(video, 895, 457.5, 502, 318)
+    //     texture.needsUpdate = true
+    //     setTimeout( function() {
+    //         requestAnimationFrame( animation );
+    //     }, 1000 / 30 ); 
+    // }
+
+    // video.addEventListener("play", () => {
+    //     (function loop() {
+    //         if(!video.paused && !video.ended) {
+    //             console.log('tet');
+    //             ctx.drawImage(video, 895, 457.5, 502, 318)
+    //             setTimeout(loop, 1000 / 60)
+    //         }
+    //     })
+    // })
 
     return texture;
 }
@@ -51,7 +63,7 @@ function getCanvasImage() {
 const init = () => {
     scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 1000);
     camera.position.set(0, 0, 1);
 
     renderer = new THREE.WebGLRenderer( {
@@ -64,11 +76,15 @@ const init = () => {
     controls = new THREE.OrbitControls(camera, renderer.domElement)
 
     // Create material
-    material = new THREE.MeshBasicMaterial({map:getCanvasImage()});
+    material = new THREE.MeshBasicMaterial({
+        map:getCanvasImage()
+    });
 
     // Create cube and add to scene.
-    var geometry = new THREE.SphereBufferGeometry(50, 32, 32).scale(-1, 1, 1);
+    var geometry = new THREE.SphereBufferGeometry(10, 32, 32).scale(-1, 1, 1);
+
     mesh = new THREE.Mesh(geometry, material);
+    
     scene.add(mesh);
 
 
@@ -88,7 +104,7 @@ const animate = () => {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
     stats.update();
-    controls.update()
+    controls.update();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
