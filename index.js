@@ -19,6 +19,73 @@ ctx = canvas.getContext('2d')
 canvas.width  = 3840
 canvas.height = 2160
 
+class panoramicImage{
+    constructor(imageSource) {
+        this.imageSource = imageSource
+        sceneImage = this.panoramicImage
+    }
+
+    createImage() {
+        sceneImage = new Image()
+
+        sceneImage.onload = function() {
+            ctx.drawImage(sceneImage, 0, 0, this.width, this.height)
+        }
+
+        sceneImage.src = this.imageSource
+
+        console.log(sceneImage)
+    }
+
+    init() {
+        this.createImage()
+    }
+}
+
+class Video{
+    constructor(videoSource, x, y, w, h) {
+        this.videoSource = videoSource
+        this.size = {
+            w,
+            h
+        }
+        this.position = {
+            x,
+            y
+        };
+        this.fps = 30
+        this.raf = null;
+    }
+    createVideo() {
+        this.video = document.createElement("video")
+        this.video.src = this.videoSource
+
+        this.video.muted = true
+        this.video.loop = true
+
+        this.video.play()
+    }
+    positionVideo() {
+        ctx.drawImage(this.video, this.position.x, this.position.y, this.size.w, this.size.h)
+
+        texture.needsUpdate = true
+    }
+
+    run() {
+        setTimeout(() => {
+            this.positionVideo()
+            this.run()
+        }, 1000 / this.fps)
+    }
+    
+
+    init() {
+        this.createVideo()
+        this.positionVideo()
+        this.run()
+    }
+}
+
 const getCanvasImage = () => {
     texture = new THREE.CanvasTexture(canvas)
 
