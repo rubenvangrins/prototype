@@ -29,33 +29,33 @@ function getCanvasImage() {
 
     img.src = imageSource;
 
-    // let video = document.createElement("video")
-    // video.src = videoSource
+    let video = document.createElement("video")
+    video.src = videoSource
 
-    // video.play();
+    video.play();
 
-    // video.oncanplay = () => {
-    //     requestAnimationFrame( animation );
-    //     video.play()
-    // }
+    video.oncanplay = () => {
+        requestAnimationFrame( animation );
+        video.play()
+    }
 
-    // function animation() {
-    //     ctx.drawImage(video, 895, 457.5, 502, 318)
-    //     texture.needsUpdate = true
-    //     setTimeout( function() {
-    //         requestAnimationFrame( animation );
-    //     }, 1000 / 30 ); 
-    // }
+    function animation() {
+        ctx.drawImage(video, 895, 457.5, 502, 318)
+        texture.needsUpdate = true
+        setTimeout( function() {
+            requestAnimationFrame( animation );
+        }, 1000 / 30 ); 
+    }
 
-    // video.addEventListener("play", () => {
-    //     (function loop() {
-    //         if(!video.paused && !video.ended) {
-    //             console.log('tet');
-    //             ctx.drawImage(video, 895, 457.5, 502, 318)
-    //             setTimeout(loop, 1000 / 60)
-    //         }
-    //     })
-    // })
+    video.addEventListener("play", () => {
+        (function loop() {
+            if(!video.paused && !video.ended) {
+                console.log('tet');
+                ctx.drawImage(video, 895, 457.5, 502, 318)
+                setTimeout(loop, 1000 / 60)
+            }
+        })
+    })
 
     return texture;
 }
