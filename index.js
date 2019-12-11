@@ -51,19 +51,19 @@ const init = () => {
 
     sphere = new THREE.SphereBufferGeometry(50, 32, 32).scale(-1, 1, 1)
 
-    // videoSource = new THREE.MeshBasicMaterial( {
-    //     map: new THREE.VideoTexture( video )
-    // })
+    videoSource = new THREE.MeshBasicMaterial( {
+        map: new THREE.VideoTexture( video )
+    })
 
-    // imageTexture = new THREE.TextureLoader().load(scene1_imageDome)
+    imageTexture = new THREE.TextureLoader().load(scene1_imageDome)
 
-    // imageTexture.minFilter = THREE.LinearFilter;
-    // imageTexture.magFilter = THREE.LinearFilter;
+    imageTexture.minFilter = THREE.LinearFilter;
+    imageTexture.magFilter = THREE.LinearFilter;
 
-    // imageSource = new THREE.MeshBasicMaterial({
-    //     map: imageTexture,
-    //     transparent: true
-    // })
+    imageSource = new THREE.MeshBasicMaterial({
+        map: imageTexture,
+        transparent: true
+    })
 
     sphereButton = new THREE.Mesh(
         new THREE.SphereBufferGeometry(1, 32, 32),
@@ -76,68 +76,68 @@ const init = () => {
 
     sphereButton.position.set(40, 0, -30)
 
-    // imageDome = new THREE.Mesh(sphere, imageSource)
-    // videoDome = new THREE.Mesh(sphere , videoSource)
+    imageDome = new THREE.Mesh(sphere, imageSource)
+    videoDome = new THREE.Mesh(sphere , videoSource)
     
     scene1 = new THREE.Group()
-    // scene1.add(imageDome)
-    // scene1.add(videoDome)
+    scene1.add(imageDome)
+    scene1.add(videoDome)
     scene1.add(sphereButton)
     scene1.traverse( function( child ) { child.layers.set( 1 ) } )
     scene.add(scene1)
 
     // 360 Sphere Scene 2
-    // video = document.createElement('video')
-    // video.crossOrigin = 'anonymous'
-    // video.width = 640
-    // video.height = 360
-    // video.loop = true
-    // video.muted = true
-    // video.src =  scene2_videoDome
-    // video.setAttribute('webkit-playsinline', 'webkit-playsinline')
-    // video.play()
+    video = document.createElement('video')
+    video.crossOrigin = 'anonymous'
+    video.width = 640
+    video.height = 360
+    video.loop = true
+    video.muted = true
+    video.src =  scene2_videoDome
+    video.setAttribute('webkit-playsinline', 'webkit-playsinline')
+    video.play()
 
-    // sphere = new THREE.SphereBufferGeometry(50, 32, 32).scale(-1, 1, 1)
+    sphere = new THREE.SphereBufferGeometry(50, 32, 32).scale(-1, 1, 1)
 
-    // videoSource = new THREE.MeshBasicMaterial( {
-    //     map: new THREE.VideoTexture( video )
-    // })
+    videoSource = new THREE.MeshBasicMaterial( {
+        map: new THREE.VideoTexture( video )
+    })
 
-    // imageTexture = new THREE.TextureLoader().load(scene2_imageDome)
+    imageTexture = new THREE.TextureLoader().load(scene2_imageDome)
 
-    // imageTexture.minFilter = THREE.LinearFilter;
-    // imageTexture.magFilter = THREE.LinearFilter;
+    imageTexture.minFilter = THREE.LinearFilter;
+    imageTexture.magFilter = THREE.LinearFilter;
 
-    // imageSource = new THREE.MeshBasicMaterial({
-    //     map: imageTexture,
-    //     transparent: true
-    // })
+    imageSource = new THREE.MeshBasicMaterial({
+        map: imageTexture,
+        transparent: true
+    })
 
-    // sphereButton = new THREE.Mesh(
-    //     new THREE.SphereBufferGeometry(1, 32, 32),
-    //     new THREE.MeshNormalMaterial({
+    sphereButton = new THREE.Mesh(
+        new THREE.SphereBufferGeometry(1, 32, 32),
+        new THREE.MeshNormalMaterial({
 
-    //     }),
+        }),
         
-    // )
+    )
 
-    // sphereButton.name = "scene2_button"
+    sphereButton.name = "scene2_button"
 
-    // imageDome = new THREE.Mesh(sphere, imageSource)
-    // videoDome = new THREE.Mesh(sphere , videoSource)
+    imageDome = new THREE.Mesh(sphere, imageSource)
+    videoDome = new THREE.Mesh(sphere , videoSource)
     
-    // scene2 = new THREE.Group()
-    // scene2.add(imageDome)
-    // scene2.add(videoDome)
-    // scene2.add(sphereButton)
+    scene2 = new THREE.Group()
+    scene2.add(imageDome)
+    scene2.add(videoDome)
+    scene2.add(sphereButton)
 
-    // sphereButton.position.set(-10, -5, -45)
+    sphereButton.position.set(-10, -5, -45)
 
-    // // scene2.position.x = 100
+    // scene2.position.x = 100
 
-    // scene2.traverse( function( child ) { child.layers.set( 2 ) } )
+    scene2.traverse( function( child ) { child.layers.set( 2 ) } )
 
-    // scene.add(scene2)     
+    scene.add(scene2)     
 
     // navigate to other scene
     const onMouseClick = (event) => {
@@ -160,11 +160,17 @@ const init = () => {
                 let cameraY = changeScene[i].object.position.y
                 let cameraZ = changeScene[i].object.position.z
 
-                camera.layers.enable( 2 );
-                camera.layers.disable( 1 )
+                // camera.layers.enable( 2 )
+                // camera.layers.disable( 1 )
 
-                // tl.to(controls.target, .5, {z: cameraZ, x: cameraX})
-                // .add( function(){ controls.reset()}  )
+                tl.to(controls.target, .5, {z: cameraZ, x: cameraX})
+                .add( function(){ 
+                    controls.reset() 
+                    camera.layers.enable( 2 )
+                    camera.layers.disable( 1 )
+                }  )
+
+
                 // .to(changeScene[i].object.parent.position, .5, {x: -100})
                 // .to(changeScene[i].object.parent.parent.children[1].position, .5, {x: 0}, "-=.5")
                 
@@ -175,11 +181,15 @@ const init = () => {
                 let cameraY = changeScene[i].object.position.y
                 let cameraZ = changeScene[i].object.position.z
 
-                camera.layers.enable( 1 )
-                camera.layers.disable( 2 )
+                // camera.layers.enable( 1 )
+                // camera.layers.disable( 2 )
 
-                // tl.to(controls.target, .5, {z: cameraZ, x: cameraX})
-                // .add( function(){ controls.reset()}  )
+                tl.to(controls.target, .5, {z: cameraZ, x: cameraX})
+                .add( function(){ 
+                    controls.reset() 
+                    camera.layers.enable( 1 )
+                    camera.layers.disable( 2 )
+                }  )
                 // .to(changeScene[i].object.parent.position, .5, {x: 100})
                 // .to(changeScene[i].object.parent.parent.children[0].position, .5, {x: 0}, "-=.5")
             }
