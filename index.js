@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let dome = new THREE.Mesh(
         new THREE.SphereGeometry(49, 32, 32).scale(-1, 1, 1),
         new THREE.MeshBasicMaterial({
-            map: new THREE.TextureLoader().load( imageSource_full ),     
-            alphaMap: new THREE.TextureLoader().load( imageSource ),
+            alphaMap: new THREE.TextureLoader().load( imageSource_full ),     
+            map: new THREE.TextureLoader().load( imageSource ),
             alphaTest: 0.1
         })
     );
