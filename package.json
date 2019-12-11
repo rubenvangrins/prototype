@@ -7,7 +7,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "dev": "parcel index.html -p 3000",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --public-url ./"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.3",
