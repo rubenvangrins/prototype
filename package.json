@@ -5,7 +5,9 @@
   "author": "gifgaar",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel index.html -p 3000"
+    "prebuild": "rm -rf dist",
+    "dev": "parcel index.html -p 3000",
+    "build": "parcel index.html"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.3",
