@@ -91,7 +91,7 @@ let sound1 = new THREE.PositionalAudio( listener );
 audioLoader.load( musicSource, function ( buffer ) {
     sound1.setBuffer( buffer );
     sound1.setRolloffFactor(2);
-    sound1.play();
+    sound1.setLoop(true)
 } );
 
 muziekMesh.add( sound1 );
@@ -102,10 +102,15 @@ let sound2 = new THREE.PositionalAudio( listener );
 audioLoader.load( borrelSource, function ( buffer ) {
     sound2.setBuffer( buffer );
     sound2.setRefDistance(10);
-    sound2.play();
 } );
 
 borrelMesh.add( sound2 );
+
+let button = document.querySelector('#button')
+
+button.addEventListener('click', () => {
+    sound1.play()
+})
 
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
