@@ -2,8 +2,8 @@ import './style.scss'
 import * as THREE from 'three';
 import * as OrbitControls from 'three-orbitcontrols';
 
-import imageSource from './src/img/kickboxer_cut0.png';
-import imageSource_full from './src/img/kickboxer_full0.png';
+import imageSource from './src/img/beerze.png';
+import imageSource_full from './src/img/beerze_full.jpg';
 
 document.addEventListener("DOMContentLoaded", () => {
 
