@@ -1,6 +1,7 @@
 import './style.scss'
 import * as THREE from 'three';
 import * as OrbitControls from 'three-orbitcontrols';
+import Stats from 'stats.js'
 
 /* Sources */
 import imageSource from './src/img/beerze.png';
@@ -119,11 +120,16 @@ window.addEventListener('resize', () => {
     renderer.setSize( window.innerWidth, window.innerHeight );  
 })
 
+let stats = new Stats()
+document.body.appendChild(stats.dom)
+
 const animate = () => {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 
     controls.update();
+
+    stats.update()
 };
 
 new animate();
